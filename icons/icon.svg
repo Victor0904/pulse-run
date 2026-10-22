@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <!-- PULSE RUN — icône. Fond plein (compatible maskable : contenu essentiel dans le cercle central de r 205). -->
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="46%" r="70%">
+      <stop offset="0" stop-color="#1A1236"/>
+      <stop offset="0.55" stop-color="#0D0A1A"/>
+      <stop offset="1" stop-color="#07060D"/>
+    </radialGradient>
+    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="9" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="glowS" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="6" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <rect width="512" height="512" fill="url(#bg)"/>
+
+  <!-- sillons -->
+  <g fill="none" stroke="#2A1A5C" stroke-width="2" opacity="0.9">
+    <circle cx="256" cy="240" r="70"/>
+    <circle cx="256" cy="240" r="96"/>
+    <circle cx="256" cy="240" r="122"/>
+    <circle cx="256" cy="240" r="226"/>
+  </g>
+
+  <!-- orbite -->
+  <circle cx="256" cy="240" r="176" fill="none" stroke="#FFFFFF" stroke-opacity="0.18" stroke-width="3"/>
+
+  <!-- anneau danger extérieur, brèche en bas (centrée sur 90°, ouverture 58°) -->
+  <g filter="url(#glow)" fill="none" stroke-linecap="round">
+    <!-- arc de 119° à 421° (=61°) sur r 176 -->
+    <path d="M 170.7 393.9 A 176 176 0 1 1 341.3 393.9" stroke="#FF2E63" stroke-width="22"/>
+    <path d="M 170.7 393.9 A 176 176 0 1 1 341.3 393.9" stroke="#FFD3DE" stroke-width="6"/>
+  </g>
+
+  <!-- anneau danger intérieur (plus jeune), brèche en haut -->
+  <g filter="url(#glowS)" fill="none" stroke-linecap="round" opacity="0.85">
+    <path d="M 293.9 165.6 A 84 84 0 1 1 218.1 165.6" stroke="#FF2E63" stroke-width="13"/>
+    <path d="M 293.9 165.6 A 84 84 0 1 1 218.1 165.6" stroke="#FFD3DE" stroke-width="3.5"/>
+  </g>
+
+  <!-- cœur (membrane) -->
+  <g filter="url(#glowS)">
+    <circle cx="256" cy="240" r="40" fill="#0F0C1C" stroke="#8A5CFF" stroke-width="7"/>
+    <circle cx="256" cy="240" r="26" fill="none" stroke="#8A5CFF" stroke-width="3" opacity="0.6"/>
+    <circle cx="256" cy="240" r="9" fill="#8A5CFF"/>
+  </g>
+
+  <!-- fantôme de brèche (lime) sur l'orbite -->
+  <path d="M 214.5 411.0 A 176 176 0 0 0 297.5 411.0" fill="none" stroke="#C8FF2E" stroke-opacity="0.5" stroke-width="9" stroke-linecap="round"/>
+
+  <!-- Curseur dans la brèche -->
+  <g filter="url(#glow)" transform="translate(256 416)">
+    <path d="M 0 -26 L 19 0 L 0 26 L -19 0 Z" fill="#C8FF2E" fill-opacity="0.25" stroke="#C8FF2E" stroke-width="6" stroke-linejoin="round"/>
+    <circle r="7" fill="#FFFFFF"/>
+  </g>
+</svg>

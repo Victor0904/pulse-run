@@ -1,0 +1,55 @@
+// Album 2 — SYNCOPE · 8. Ligne 4/4 (3 brèches à choisir vite ; CROIX sur les crashs du drop ; ROT 80)
+export default {
+  id: 'a2s4', album: 2, n: 4, title: 'Ligne 4/4',
+  bpm: 128, beatsPerBar: 4, swing: 0, key: 'D', scale: 'dorian',
+  approach: 1.00, omegaMax: 380, gap: 'S',
+  music: { kit: 'funk', bass: 'funk' },
+  sections: [
+    { name: 'DÉCOMPTE', kind: 'count', bars: 1 },
+    { name: 'INTRO', kind: 'intro', bars: 4,
+      chart: [['2:1', 'M', 'TUNNEL', { n: 6, every: 2, a: 90, w: 'L' }]] },
+    { name: 'COUPLET', kind: 'verse', bars: 8,
+      chart: [['1:1', 'M', 'ZIGZAG', { n: 32, every: 1, from: 'p', amp: 80, w: 'S', n2: 3, sep: 120 }]] },
+    { name: 'REFRAIN', kind: 'chorus', bars: 8,
+      chart: [
+        ['1:1', 'M', 'ESCALIER', { n: 32, every: 1, from: 'p', step: 50, w: 'S', n2: 3, sep: 120 }],
+        ['1:5', 'M', 'LAMES', { n: 16, every: 2, from: 'opp', arc: 80 }],
+      ] },
+    { name: 'PAUSE', kind: 'pause', bars: 2, chart: [['2:1', 'R', 'p', 'M']] },
+    { name: 'COUPLET', kind: 'verse', bars: 8,
+      chart: [['1:1', 'M', 'ZIGZAG', { n: 32, every: 1, from: 'p', amp: 100, w: 'S', n2: 3, sep: 120 }]] },
+    { name: 'MONTÉE', kind: 'build', bars: 4,
+      chart: [
+        ['1:5', 'M', 'LAMES', { n: 4, every: 2, from: 'opp', arc: 140 }],
+        ['3:1', 'M', 'LAMES', { n: 4, every: 1, from: 'opp', arc: 140 }],
+        ['4:1', 'M', 'LAMES', { n: 8, every: '1/2', from: 'opp', arc: 100 }],
+      ] },
+    { name: 'DROP', kind: 'drop', bars: 8,
+      chart: [
+        ['1:1', 'FX', 'DROP'],
+        ['1:1', 'ROT', 80, 4],
+        // CROIX sur chaque crash (toutes les 2 mesures), qui tourne de 45° ; les anneaux restent entre deux branches
+        ['1:1', 'M', 'CROIX', { n: 1, from: 135, d: 0.5 }], ['1:1', 'M', 'ZIGZAG', { n: 8, every: 1, from: 90, amp: 40, w: 'S' }],
+        ['3:1', 'M', 'CROIX', { n: 1, from: 180, d: 0.5 }], ['3:1', 'M', 'ZIGZAG', { n: 8, every: 1, from: 135, amp: 40, w: 'S' }],
+        ['5:1', 'M', 'CROIX', { n: 1, from: 225, d: 0.5 }], ['5:1', 'M', 'ZIGZAG', { n: 8, every: 1, from: 180, amp: 40, w: 'S' }],
+        ['7:1', 'M', 'CROIX', { n: 1, from: 270, d: 0.5 }], ['7:1', 'M', 'ZIGZAG', { n: 8, every: 1, from: 225, amp: 40, w: 'S' }],
+      ] },
+    { name: 'REFRAIN', kind: 'chorus', bars: 8,
+      chart: [
+        ['1:1', 'ROT', 0, 2],
+        ['1:1', 'M', 'ESCALIER', { n: 32, every: 1, from: 'p', step: -50, w: 'S', n2: 3, sep: 120 }],
+        ['1:5', 'M', 'LAMES', { n: 16, every: 2, from: 'opp', arc: 80 }],
+      ] },
+    { name: 'DROP', kind: 'drop', bars: 8,
+      chart: [
+        ['1:1', 'FX', 'DROP'],
+        ['1:1', 'ROT', -80, 4],
+        ['1:1', 'M', 'CROIX', { n: 1, from: 135, d: 0.5 }], ['1:1', 'M', 'ZIGZAG', { n: 8, every: 1, from: 90, amp: -40, w: 'S' }],
+        ['3:1', 'M', 'CROIX', { n: 1, from: 90, d: 0.5 }], ['3:1', 'M', 'ZIGZAG', { n: 8, every: 1, from: 45, amp: -40, w: 'S' }],
+        ['5:1', 'M', 'CROIX', { n: 1, from: 45, d: 0.5 }], ['5:1', 'M', 'ZIGZAG', { n: 8, every: 1, from: 0, amp: -40, w: 'S' }],
+        ['7:1', 'M', 'CROIX', { n: 1, from: 0, d: 0.5 }], ['7:1', 'M', 'ZIGZAG', { n: 8, every: 1, from: 315, amp: -40, w: 'S' }],
+        ['8:13', 'ROT', 0, 1],
+      ] },
+    { name: 'OUTRO', kind: 'outro', bars: 1, chart: [['1:1', 'R', 'p', 'XL']] },
+  ],
+};

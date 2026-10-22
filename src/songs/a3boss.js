@@ -1,0 +1,55 @@
+// Album 3 — BOSS · LA MEMBRANE (haut-parleur ; Sub : ondes éclair ; Larsen : croix tournante ; Silence ; Finale 174)
+export default {
+  id: 'a3boss', album: 3, n: 5, boss: true, bossKind: 'membrane', title: 'LA MEMBRANE',
+  bpm: 150, beatsPerBar: 4, swing: 0, key: 'F', scale: 'phrygian',
+  approach: 0.85, omegaMax: 440, gap: 'S',
+  music: { kit: 'rave', bass: 'wobble' },
+  sections: [
+    { name: 'DÉCOMPTE', kind: 'count', bars: 1 },
+    { name: 'INTRO', kind: 'intro', bars: 2, layers: { kick: 1 }, chart: [['2:1', 'R', 90, 'XL']] },
+    { name: 'SUB', kind: 'verse', phase: 'P1', bars: 16,
+      chart: [
+        // chaque onde de choc : le cône recule 1 temps puis tire un anneau ÉCLAIR
+        ['1:1', 'M', 'ZIGZAG', { n: 32, every: 2, from: 'p', amp: 90, sp: 'eclair', w: 'S' }],
+        ['1:5', 'M', 'LAMES', { n: 32, every: 2, from: 'opp', arc: 120 }],
+      ] },
+    { name: 'LARSEN', kind: 'chorus', phase: 'P2', bars: 16,
+      chart: [
+        // croix permanente qui tourne (45°/s) ; anneaux entre les branches
+        ['1:1', 'M', 'CROIX', { n: 32, every: 2, from: 'p+45', rot: 36, d: 1.75 }],
+        ['1:5', 'M', 'ESCALIER', { n: 32, every: 2, from: 'p', step: 36, w: 'S' }],
+      ] },
+    { name: 'SILENCE', kind: 'verse', phase: 'P3', bars: 16,
+      chart: [
+        ['1:1', 'FX', 'SILENCE', 2],
+        ['1:1', 'M', 'ZIGZAG', { n: 8, every: 1, from: 'p', amp: 60, w: 'S' }],
+        ['3:1', 'FX', 'DROP'],
+        ['3:1', 'M', 'ESCALIER', { n: 24, every: '1/2', from: 'p', step: 25, w: 'S' }],
+        ['6:1', 'M', 'ZIGZAG', { n: 20, every: 1, from: 'p', amp: 90, w: 'S' }],
+        ['11:1', 'M', 'ETAU', { n: 4, every: 2, from: 'p', w: 'S' }],
+        ['11:5', 'M', 'ZIGZAG', { n: 4, every: 2, from: 'p', amp: 70, w: 'S' }],
+        ['13:1', 'M', 'ZIGZAG', { n: 16, every: 1, from: 'p', amp: 100, sp: 'eclair', w: 'S' }],
+      ] },
+    { name: 'FINALE 174', kind: 'drop', phase: 'P4', bars: 24,
+      chart: [
+        ['1:1', 'TEMPO', 174, 0],
+        ['1:1', 'FX', 'DROP'],
+        ['1:1', 'ROT', 120, 4],
+        ['1:1', 'M', 'DOUBLES', { n: 8, every: 2, from: 'p', step: 40, sp: 'rapide', w: 'S' }],
+        ['5:1', 'ROT', -120, 4],
+        ['5:1', 'M', 'ZIGZAG', { n: 16, every: 1, from: 'p', amp: 60, w: 'S' }],
+        ['9:1', 'ROT', 0, 2],
+        ['9:1', 'M', 'ESCALIER', { type: 'W', rot: 30, n: 16, every: 1, from: 'p', step: 30, w: 'S', n2: 3, sep: 120 }],
+        ['13:1', 'ROT', 120, 4],
+        ['13:1', 'M', 'ETAU', { n: 4, every: 2, from: 'p', w: 'S' }],
+        ['13:5', 'M', 'ZIGZAG', { n: 4, every: 2, from: 'p', amp: 60, w: 'S' }],
+        ['15:1', 'M', 'ZIGZAG', { n: 8, every: 1, from: 'p', amp: 70, w: 'XS' }],
+        ['17:1', 'ROT', -120, 4],
+        ['17:1', 'M', 'ESCALIER', { n: 32, every: '1/2', from: 'p', step: -12, w: 'XS' }],
+        ['21:1', 'ROT', 0, 2],
+        ['21:1', 'M', 'ZIGZAG', { n: 24, every: '1/2', from: 'p', amp: 30, w: 'XS' }],
+        ['24:1', 'M', 'TUNNEL', { n: 2, every: 2, a: 'p', sp: 'eclair', w: 'S' }],
+      ] },
+    { name: 'OUTRO', kind: 'outro', bars: 1, chart: [['1:1', 'R', 'p', 'XL']] },
+  ],
+};

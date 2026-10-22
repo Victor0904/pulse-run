@@ -1,0 +1,176 @@
+/* PULSE RUN — Design tokens (menus DOM + HUD canvas).
+   Le HUD canvas lit ces variables au démarrage via getComputedStyle(document.documentElement).
+   Aucune ressource externe : polices système uniquement.
+   RÈGLE : --c-danger* ne sert QU'AUX obstacles (et au texte RATÉ / alertes de perte). */
+
+:root {
+  color-scheme: dark;
+
+  /* ---------- Fonds ---------- */
+  --c-bg-0: #07060D;            /* fond, theme_color, background_color */
+  --c-bg-1: #0F0C1C;            /* panneaux */
+  --c-bg-2: #18132C;            /* cartes, boutons secondaires */
+  --c-bg-3: #251D44;            /* pressé, pistes de barres */
+  --c-groove: #17122A;          /* sillons concentriques */
+  --c-scrim: rgba(7, 6, 13, 0.78);
+  --c-hud-panel: rgba(7, 6, 13, 0.55);
+  --c-line: rgba(171, 164, 207, 0.16);
+  --c-line-strong: rgba(171, 164, 207, 0.34);
+
+  /* ---------- Danger (réservé) ---------- */
+  --c-danger: #FF2E63;
+  --c-danger-core: #FFD3DE;
+  --c-danger-fast: #FF8A2A;
+  --c-danger-fast-core: #FFE6CC;
+  --c-danger-tele: rgba(255, 46, 99, 0.45);
+  --c-danger-halo: rgba(255, 46, 99, 0.16);
+
+  /* ---------- Joueur / sûr ---------- */
+  --c-player: #C8FF2E;
+  --c-player-soft: #E6FF9A;
+  --c-ghost: rgba(200, 255, 46, 0.55);
+  --c-white: #FFFFFF;
+
+  /* ---------- Jugements ---------- */
+  --c-perfect: #FFFFFF;          /* contour lime */
+  --c-good: #7CF5FF;             /* BIEN */
+  --c-ok: #9A93C4;
+  --c-miss: #FF2E63;
+
+  /* ---------- Méta (HUD / menus uniquement, jamais dans l'arène) ---------- */
+  --c-gold: #FFD23F;             /* étoiles, rangs, records */
+  --c-onde: #7CF5FF;             /* monnaie ◎ */
+
+  /* ---------- Albums ---------- */
+  --c-album-1: #8A5CFF;  --c-album-1-dark: #2A1A5C;   /* BATTEMENTS */
+  --c-album-2: #1FE5C2;  --c-album-2-dark: #0C3B3A;   /* SYNCOPE */
+  --c-album-3: #3F7BFF;  --c-album-3-dark: #13235C;   /* DROP */
+  --c-accent: var(--c-album-1);                        /* redéfini par écran via [data-album] */
+  --c-accent-dark: var(--c-album-1-dark);
+
+  /* ---------- Texte ---------- */
+  --c-text-hi: #F4F1FF;
+  --c-text-mid: #ABA4CF;
+  --c-text-lo: #5F5880;
+  --c-text-on-neon: #07060D;
+
+  /* ---------- Typo (système) ---------- */
+  --font-ui: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-num: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, "Roboto Mono", monospace;
+  --fs-xs: 11px;
+  --fs-sm: 13px;
+  --fs-md: 16px;
+  --fs-lg: 20px;
+  --fs-xl: 28px;
+  --fs-xxl: 44px;
+  --fs-rank: 96px;
+  --fs-pct: 80px;
+  --fw-regular: 500;
+  --fw-bold: 800;
+  --ls-caps: 0.14em;
+  --ls-title: 0.24em;
+  --ls-banner: 0.30em;
+
+  /* ---------- Espacement / formes ---------- */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 24px;
+  --sp-6: 32px;
+  --sp-7: 48px;
+  --radius-s: 6px;
+  --radius-m: 12px;
+  --radius-l: 20px;
+  --radius-pill: 999px;
+  --border-w: 1.5px;
+
+  /* ---------- Cibles tactiles ---------- */
+  --tap-min: 48px;
+  --btn-h: 56px;
+  --btn-primary-h: 68px;
+  --btn-icon: 48px;
+  --row-h: 72px;                 /* ligne de tracklist */
+  --vinyl-d: 240px;              /* disque d'album */
+
+  /* ---------- HUD ---------- */
+  --hud-margin: 12px;
+  --hud-alpha: 0.92;
+  --hud-pouls-w: 14px;
+  --hud-pouls-h: 8px;
+  --hud-beatdot-r: 4px;
+  --hud-progress-h: 4px;
+  --hud-boss-h: 6px;
+
+  /* ---------- Safe areas ---------- */
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-right: env(safe-area-inset-right, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-left: env(safe-area-inset-left, 0px);
+
+  /* ---------- Mouvement (calé sur le tempo par JS : --beat-ms) ---------- */
+  --beat-ms: 625ms;              /* 96 BPM du menu ; mis à jour par JS */
+  --t-fast: 120ms;
+  --t-screen: 200ms;
+  --ease-out: cubic-bezier(.2, .8, .2, 1);
+  --ease-pop: cubic-bezier(.3, 1.6, .5, 1);
+  --pulse-scale: 1.04;
+  --motion: 1;                   /* 0 en mouvements réduits */
+}
+
+[data-album="1"] { --c-accent: var(--c-album-1); --c-accent-dark: var(--c-album-1-dark); }
+[data-album="2"] { --c-accent: var(--c-album-2); --c-accent-dark: var(--c-album-2-dark); }
+[data-album="3"] { --c-accent: var(--c-album-3); --c-accent-dark: var(--c-album-3-dark); }
+
+/* ---------- Base ---------- */
+html, body {
+  margin: 0; height: 100%; overflow: hidden;
+  background: var(--c-bg-0); color: var(--c-text-hi);
+  font-family: var(--font-ui); font-weight: var(--fw-regular);
+  -webkit-tap-highlight-color: transparent; -webkit-user-select: none; user-select: none;
+  touch-action: none; overscroll-behavior: none; -webkit-text-size-adjust: 100%;
+}
+
+/* ---------- Composants ---------- */
+.btn {
+  min-height: var(--btn-h); min-width: var(--tap-min);
+  padding: 0 var(--sp-4); border-radius: var(--radius-m);
+  border: var(--border-w) solid var(--c-line-strong);
+  background: var(--c-bg-2); color: var(--c-text-hi);
+  font: var(--fw-bold) var(--fs-sm)/1 var(--font-ui);
+  letter-spacing: var(--ls-caps); text-transform: uppercase;
+  transition: transform var(--t-fast) var(--ease-out), background var(--t-fast);
+}
+.btn:active { transform: scale(0.97); background: var(--c-bg-3); }
+.btn[disabled] { opacity: 0.4; }
+.btn--primary {
+  min-height: var(--btn-primary-h); width: 100%;
+  background: var(--c-player); color: var(--c-text-on-neon); border-color: transparent;
+  font-size: var(--fs-lg);
+  box-shadow: 0 0 0 1px rgba(200, 255, 46, .35), 0 0 24px rgba(200, 255, 46, .28);
+}
+.btn--accent { border-color: var(--c-accent); color: var(--c-accent); }
+.btn--icon { width: var(--btn-icon); height: var(--btn-icon); min-height: 0; padding: 0; border-radius: var(--radius-pill); }
+
+.panel { background: var(--c-bg-1); border: 1px solid var(--c-line); border-radius: var(--radius-l); }
+.caps { letter-spacing: var(--ls-caps); text-transform: uppercase; }
+.num { font-family: var(--font-num); font-variant-numeric: tabular-nums; }
+.stars { color: var(--c-gold); letter-spacing: .2em; }
+.onde { color: var(--c-onde); font-family: var(--font-num); }
+.rank { font: var(--fw-bold) var(--fs-rank)/1 var(--font-ui); color: var(--c-gold); }
+.banner {
+  font: var(--fw-bold) 12px/28px var(--font-ui); letter-spacing: var(--ls-banner);
+  background: var(--c-hud-panel); padding: 0 var(--sp-3); border-radius: var(--radius-s);
+}
+
+/* Pulsation calée sur le tempo (JS met à jour --beat-ms et relance l'animation sur le temps) */
+@keyframes beat-pulse { 0% { transform: scale(var(--pulse-scale)); } 35%, 100% { transform: scale(1); } }
+.on-beat { animation: beat-pulse var(--beat-ms) var(--ease-out) infinite; }
+
+/* ---------- Mouvements réduits ---------- */
+@media (prefers-reduced-motion: reduce) {
+  :root:not([data-motion="full"]) { --motion: 0; --pulse-scale: 1; --t-screen: 0ms; }
+  :root:not([data-motion="full"]) .on-beat { animation: none; }
+}
+:root[data-motion="reduced"] { --motion: 0; --pulse-scale: 1; --t-screen: 0ms; }
+:root[data-motion="reduced"] .on-beat { animation: none; }
